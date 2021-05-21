@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Informações do Exame</h2>
+<mat-dialog-content>
+    <div class="row">
+        <div class="col-12">
+            <h3>Escolher cliente</h3>
+        </div>
+        <div class="col-12">
+            <form [formGroup]="form" autocomplete="off">
+                <mat-form-field class="full-width">
+                    <mat-label>Cliente</mat-label>
+                    <input
+                        type="text"
+                        placeholder="Cliente"
+                        matInput
+                        formControlName="client"
+                        [matAutocomplete]="auto"
+                    />
+                    <mat-autocomplete
+                        #auto="matAutocomplete"
+                        [displayWith]="displayFn"
+                    >
+                        <mat-option
+                            *ngFor="let client of filteredOptions | async"
+                            [value]="client"
+                        >
+                            {{ client.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="btn btn-warning mr-20" mat-dialog-close>Cancelar</button>
+    <button class="btn btn-primary" color="primary" (click)="closeModal()">
+        Alugar
+    </button>
+</mat-dialog-actions>
